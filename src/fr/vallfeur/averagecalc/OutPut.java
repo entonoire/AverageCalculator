@@ -25,16 +25,16 @@ public class OutPut {
 		area.getStylesheets().add(Css.getOutPut());
 		area.setEditable(false);
 		area.setLayoutX(Area.backgroundGet().getLayoutX());
-		area.setLayoutY(130);
+		area.setLayoutY(145);
 		area.setPrefHeight(0);
-		area.setPrefWidth(Area.backgroundGet().getLayoutX());
+		area.setPrefWidth(Area.writeGet().getPrefWidth());
 		
 		return area;
 	}
 	
 	public static Node setupText(){
 		text.setLayoutX(area.getLayoutX() + 10);
-		text.setLayoutY(161);
+		text.setLayoutY(176);
 		text.setStyle("-fx-font-weight: 900; -fx-font-size: 25;");
 		text.setFill(Colors.toPaint(Colors.blueviolet));
 		

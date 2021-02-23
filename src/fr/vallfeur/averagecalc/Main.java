@@ -17,7 +17,7 @@ public class Main extends Application {
 	public void start(Stage stage) throws Exception {
 		Main.stage = stage;
 		Pane pane = new Pane();
-		Scene scene = new Scene(pane, 1280, 720);
+		Scene scene = new Scene(pane, 800, 220);
 		
 		pane.setStyle("-fx-background-color: "+Colors.toHex(Colors.darkgray)+";");
 		pane.getChildren().add(Area.backgroundSetup());

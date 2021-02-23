@@ -11,8 +11,8 @@ public class Area {
 	
 	public static Node backgroundSetup(){
 		backgroundArea.getStylesheets().add(Css.getBackgroundArea());
-		backgroundArea.setLayoutX((1280/3)-50);
-		backgroundArea.setLayoutY(40);
+		backgroundArea.setLayoutX(50);
+		backgroundArea.setLayoutY(55);
 		backgroundArea.setPrefHeight(55);
 		backgroundArea.setEditable(false);
 		
@@ -21,7 +21,7 @@ public class Area {
 	
 	public static Node writeSetup(){
 		writeArea.getStylesheets().add(Css.getWriteArea());
-		writeArea.setLayoutX((1280/3)-50);
+		writeArea.setLayoutX(50);
 		writeArea.setLayoutY(40);
 		writeArea.setPrefHeight(55);
 		writeArea.setPrefWidth(640);

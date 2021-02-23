@@ -22,6 +22,7 @@ public class Bar {
 		Menu files = new Menu("Files");
 		MenuItem load = new MenuItem("Load");
 		MenuItem purge = new MenuItem("Purge");
+		Menu settings = new Menu("Settings");
 		
 		load.setOnAction(event -> {
 			onLoadClick();
@@ -29,8 +30,11 @@ public class Bar {
 		purge.setOnAction(event -> {
 			onPurgeClick();
 		});
+		settings.setOnAction(event -> {
+			Settings.run();
+		});
 		files.getItems().addAll(load, purge);
-		menu.getMenus().add(files);
+		menu.getMenus().addAll(files, settings);
 		
 		return menu;
 	}
@@ -71,6 +75,7 @@ public class Bar {
 			return;
 		}
 	}
+	
 	
 	public static void onPurgeClick(){
 		for(File file : Manager.getAppFile().listFiles()){
