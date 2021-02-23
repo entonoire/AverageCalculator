@@ -2,6 +2,7 @@ package fr.vallfeur.averagecalc;
 
 import fr.vallfeur.averagecalc.file.LastFile;
 import fr.vallfeur.averagecalc.file.Register;
+import fr.vallfeur.averagecalc.menu.Bar;
 import fr.vallfeur.averagecalc.resources.Colors;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -41,8 +42,12 @@ public class Calculator {
 		}
 		result = result/numbers.length;
 		OutPut.setText(String.valueOf(result));
-		LastFile.register(result, numbers);
-		Register.create(result, numbers);
+		if(Bar.savingLastResult()){
+			LastFile.register(result, numbers);
+		}
+		if(Bar.savingResult()){
+			Register.create(result, numbers);
+		}
 		result = 0;
 	}
 	

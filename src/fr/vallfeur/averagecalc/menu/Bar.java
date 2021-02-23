@@ -11,6 +11,7 @@ import fr.vallfeur.averagecalc.Main;
 import fr.vallfeur.averagecalc.file.Manager;
 import fr.vallfeur.averagecalc.resources.Resources;
 import javafx.scene.Node;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -18,19 +19,25 @@ import javafx.stage.FileChooser;
 
 public class Bar {
 	
+	private static CheckMenuItem resultSave = new CheckMenuItem("save result");
+	private static CheckMenuItem lastresultSave = new CheckMenuItem("save last result");
+	
 	public static Node setup(){
 		MenuBar menu = new MenuBar();
 		Menu files = new Menu("Files", Resources.getMenuIcon("files"));
 		MenuItem load = new MenuItem("Load", Resources.getMenuIcon("load"));
 		MenuItem purge = new MenuItem("Purge", Resources.getMenuIcon("purge"));
 		Menu settings = new Menu("Settings", Resources.getMenuIcon("settings"));
-
+		resultSave.setSelected(true);
+		lastresultSave.setSelected(true);
+		
 		load.setOnAction(event -> {
 			onLoadClick();
 		});
 		purge.setOnAction(event -> {
 			onPurgeClick();
 		});
+		settings.getItems().addAll(resultSave, lastresultSave);
 		files.getItems().addAll(load, purge);
 		menu.getMenus().addAll(files, settings);
 		
@@ -79,5 +86,14 @@ public class Bar {
 		for(File file : Manager.getAppFile().listFiles()){
 			file.delete();
 		}
+	}
+	
+	
+	public static boolean savingResult(){
+		return resultSave.isSelected();
+	}
+	
+	public static boolean savingLastResult(){
+		return lastresultSave.isSelected();
 	}
 }

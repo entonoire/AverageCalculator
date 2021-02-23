@@ -31,6 +31,7 @@ public class Main extends Application {
 		stage.centerOnScreen();
 		stage.getIcons().add(new Image(Colors.class.getResourceAsStream("icon.png")));
 		stage.setTitle("Average Calculator");
+		stage.setResizable(false);
 		
 		Manager.createBase();
 		Main.stage = stage;
