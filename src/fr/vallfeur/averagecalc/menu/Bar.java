@@ -9,6 +9,7 @@ import java.io.IOException;
 import fr.vallfeur.averagecalc.Area;
 import fr.vallfeur.averagecalc.Main;
 import fr.vallfeur.averagecalc.file.Manager;
+import fr.vallfeur.averagecalc.resources.Resources;
 import javafx.scene.Node;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -19,19 +20,16 @@ public class Bar {
 	
 	public static Node setup(){
 		MenuBar menu = new MenuBar();
-		Menu files = new Menu("Files");
-		MenuItem load = new MenuItem("Load");
-		MenuItem purge = new MenuItem("Purge");
-		Menu settings = new Menu("Settings");
-		
+		Menu files = new Menu("Files", Resources.getMenuIcon("files"));
+		MenuItem load = new MenuItem("Load", Resources.getMenuIcon("load"));
+		MenuItem purge = new MenuItem("Purge", Resources.getMenuIcon("purge"));
+		Menu settings = new Menu("Settings", Resources.getMenuIcon("settings"));
+
 		load.setOnAction(event -> {
 			onLoadClick();
 		});
 		purge.setOnAction(event -> {
 			onPurgeClick();
-		});
-		settings.setOnAction(event -> {
-			Settings.run();
 		});
 		files.getItems().addAll(load, purge);
 		menu.getMenus().addAll(files, settings);

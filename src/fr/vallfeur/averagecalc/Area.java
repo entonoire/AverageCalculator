@@ -22,7 +22,7 @@ public class Area {
 	public static Node writeSetup(){
 		writeArea.getStylesheets().add(Css.getWriteArea());
 		writeArea.setLayoutX(50);
-		writeArea.setLayoutY(40);
+		writeArea.setLayoutY(55);
 		writeArea.setPrefHeight(55);
 		writeArea.setPrefWidth(640);
 		

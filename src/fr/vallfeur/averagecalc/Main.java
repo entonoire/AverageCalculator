@@ -15,7 +15,6 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage stage) throws Exception {
-		Main.stage = stage;
 		Pane pane = new Pane();
 		Scene scene = new Scene(pane, 800, 220);
 		
@@ -34,6 +33,7 @@ public class Main extends Application {
 		stage.setTitle("Average Calculator");
 		
 		Manager.createBase();
+		Main.stage = stage;
 	}
 
 	public static void main(String[] args) {
