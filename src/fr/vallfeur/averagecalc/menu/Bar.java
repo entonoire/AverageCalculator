@@ -5,10 +5,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 import fr.vallfeur.averagecalc.Area;
+import fr.vallfeur.averagecalc.Calculator;
 import fr.vallfeur.averagecalc.Main;
 import fr.vallfeur.averagecalc.file.Manager;
+import fr.vallfeur.averagecalc.file.Settings;
 import fr.vallfeur.averagecalc.resources.Resources;
 import javafx.scene.Node;
 import javafx.scene.control.CheckMenuItem;
@@ -18,7 +23,7 @@ import javafx.scene.control.MenuItem;
 import javafx.stage.FileChooser;
 
 public class Bar {
-	
+	//real help https://docs.oracle.com/javafx/2/ui_controls/menu_controls.htm
 	private static CheckMenuItem resultSave = new CheckMenuItem("save result");
 	private static CheckMenuItem lastresultSave = new CheckMenuItem("save last result");
 	
@@ -28,8 +33,48 @@ public class Bar {
 		MenuItem load = new MenuItem("Load", Resources.getMenuIcon("load"));
 		MenuItem purge = new MenuItem("Purge", Resources.getMenuIcon("purge"));
 		Menu settings = new Menu("Settings", Resources.getMenuIcon("settings"));
-		resultSave.setSelected(true);
-		lastresultSave.setSelected(true);
+
+		try {
+			for(String str : Files.readAllLines(Paths.get(Settings.get().toURI()))){
+				switch (str) {
+				case "resultsave: true;":
+					resultSave.setSelected(true);
+					break;
+				case "resultsave: false;":
+					resultSave.setSelected(false);
+					break;
+				case "lastresultsave: true;":
+					lastresultSave.setSelected(true);
+					break;
+				case "lastresultsave: false;":
+					lastresultSave.setSelected(false);
+					break;
+				default:
+					break;
+				}
+			}
+		} catch (IOException e) {
+			Calculator.errorPopup("FileError", "I can't read the file in "+Settings.get().getPath()+", please contact the developper for help.");
+			e.printStackTrace();
+		}
+
+		resultSave.setOnAction(event -> {
+			try {
+				Files.write(Paths.get(Settings.get().toURI()), ("resultsave: "+resultSave.isSelected()+";").getBytes(), StandardOpenOption.TRUNCATE_EXISTING);
+			} catch (IOException e) {
+				Calculator.errorPopup("FileError", "I can't write the file in "+Settings.get().getPath()+", please contact the developper for help.");
+				e.printStackTrace();
+			}
+
+		});
+		lastresultSave.setOnAction(event -> {
+			try {
+				Files.write(Paths.get(Settings.get().toURI()), ("\nlastresultsave: "+lastresultSave.isSelected()+";").getBytes(), StandardOpenOption.APPEND);
+			} catch (IOException e) {
+				Calculator.errorPopup("FileError", "I can't write the file in "+Settings.get().getPath()+", please contact the developper for help.");
+				e.printStackTrace();
+			}
+		});
 		
 		load.setOnAction(event -> {
 			onLoadClick();

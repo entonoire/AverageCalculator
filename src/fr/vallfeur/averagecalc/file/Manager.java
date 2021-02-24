@@ -13,7 +13,7 @@ public class Manager {
 				AppFile.mkdir();
 			}
 		}
-		
+		Settings.setup();
 	}
 	
 	public static File getAppFile(){
