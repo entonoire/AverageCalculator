@@ -30,7 +30,7 @@ public class Main extends Application {
 		pane.getChildren().add(OutPut.setupArea());
 		pane.getChildren().add(OutPut.setupText());
 		pane.getChildren().add(Bar.setup());
-//		pane.getChildren().add(versionText()); wait i need to do the code for the version with github api -_-
+		pane.getChildren().add(versionText());
 		stage.setScene(scene);
 		stage.show();
 		stage.centerOnScreen();
@@ -50,8 +50,11 @@ public class Main extends Application {
 	}
 
 	public static Node versionText(){
-		Text text = new Text("1.0");
-		
+		Text text = new Text("v"+VersionMain.getVersion());
+		text.setStyle("-fx-font-size: 20;");
+		text.setFill(Colors.toPaint(Colors.grayviolet));
+		text.setX(765);
+		text.setY(220);
 		return text;
 	}
 	

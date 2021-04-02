@@ -2,7 +2,6 @@ package fr.vallfeur.averagecalc.version;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -11,7 +10,7 @@ import java.util.Arrays;
 
 public class VersionMain {
 
-	static Double version;
+	static Double version = 0.3;
 	static Double content;
 	static int i = 0;
 	
@@ -38,16 +37,6 @@ public class VersionMain {
 				i++;
 			});
 			
-			FileReader reader = new FileReader("README.md");
-			BufferedReader bufferedReader = new BufferedReader(reader);
-			try{
-				version = Double.parseDouble(bufferedReader.readLine());		
-				bufferedReader.close();
-			}catch(IOException e){
-				e.printStackTrace();
-				return;			
-			}
-
 		}catch(FileNotFoundException e){
 			e.printStackTrace();
 			return;
@@ -57,6 +46,10 @@ public class VersionMain {
 		if(version < content){
 			System.out.println("a new version is here! (actual version: "+version+" new version: "+content+")");
 		}
+	}
+	
+	public static Double getVersion(){
+		return version;
 	}
 
 }
