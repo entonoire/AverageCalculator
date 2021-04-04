@@ -7,10 +7,18 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Optional;
+
+import fr.vallfeur.averagecalc.resources.Colors;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 public class VersionMain {
 
-	static Double version = 0.3;
+	static Double version = 0.2;
 	static Double content;
 	static int i = 0;
 	
@@ -44,7 +52,29 @@ public class VersionMain {
 			e.printStackTrace();
 		}
 		if(version < content){
-			System.out.println("a new version is here! (actual version: "+version+" new version: "+content+")");
+//			Alert alert = new Alert(AlertType.INFORMATION);
+//			alert.setTitle("Information");
+//			alert.setHeaderText("A new version is here");
+//			((Stage)alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image(Colors.class.getResourceAsStream("icon.png")));
+//			
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Update");
+			alert.setHeaderText("A new version is here, did you wan't to download it?");
+			((Stage)alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image(Colors.class.getResourceAsStream("icon.png")));
+			
+			Optional<ButtonType> result = alert.showAndWait();
+			if(result.isPresent() && result.get().equals(ButtonType.OK)){	
+				
+				//from https://stackoverflow.com/a/16394462/10523888
+				
+				 try {
+					String url_open ="https://github.com/entonoire/AverageCalculator/releases/download/"+content+"/AverageCalc.jar";
+					java.awt.Desktop.getDesktop().browse(java.net.URI.create(url_open));
+			        }catch (IOException e) {
+			            e.printStackTrace();
+			        }
+			}
+			
 		}
 	}
 	

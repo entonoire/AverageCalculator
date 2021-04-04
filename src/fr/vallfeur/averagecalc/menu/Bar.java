@@ -21,6 +21,8 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.stage.FileChooser;
 
+
+
 public class Bar {
 	//real help https://docs.oracle.com/javafx/2/ui_controls/menu_controls.htm
 	private static CheckMenuItem resultSave = new CheckMenuItem("save result");
