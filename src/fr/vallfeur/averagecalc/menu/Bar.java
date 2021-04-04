@@ -14,7 +14,6 @@ import fr.vallfeur.averagecalc.Calculator;
 import fr.vallfeur.averagecalc.Main;
 import fr.vallfeur.averagecalc.file.Manager;
 import fr.vallfeur.averagecalc.file.Settings;
-import fr.vallfeur.averagecalc.resources.Resources;
 import javafx.scene.Node;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Menu;
@@ -29,10 +28,10 @@ public class Bar {
 	
 	public static Node setup(){
 		MenuBar menu = new MenuBar();
-		Menu files = new Menu("Files", Resources.getMenuIcon("files"));
-		MenuItem load = new MenuItem("Load", Resources.getMenuIcon("load"));
-		MenuItem purge = new MenuItem("Purge", Resources.getMenuIcon("purge"));
-		Menu settings = new Menu("Settings", Resources.getMenuIcon("settings"));
+		Menu files = new Menu("Files");
+		MenuItem load = new MenuItem("Load");
+		MenuItem purge = new MenuItem("Purge");
+		Menu settings = new Menu("Settings");
 
 		try {
 			for(String str : Files.readAllLines(Paths.get(Settings.get().toURI()))){
