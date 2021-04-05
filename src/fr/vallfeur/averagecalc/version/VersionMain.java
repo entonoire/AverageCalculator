@@ -1,10 +1,12 @@
 package fr.vallfeur.averagecalc.version;
 
+import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Optional;
@@ -18,20 +20,19 @@ import javafx.stage.Stage;
 
 public class VersionMain {
 
-	static Double version = 0.2;
+	static Double version = 0.1;
 	static Double content;
 	static int i = 0;
+	static String versionName;
 	
 	public static void setup(){
 		try{
 			
 			//from https://github.com/goxr3plus/Java-GitHub-API/blob/master/URLReader.java
-			//Create HttpURLConnection 
 			HttpURLConnection httpcon = (HttpURLConnection) new URL("https://api.github.com/repos/entonoire/AverageCalculator/releases").openConnection();
 			httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
 			BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
 			
-			//Read line by line
 			StringBuilder responseSB = new StringBuilder();
 			String line;
 			while ( ( line = in.readLine() ) != null) {
@@ -44,6 +45,13 @@ public class VersionMain {
 				}
 				i++;
 			});
+			i=0;
+			Arrays.stream(responseSB.toString().split("\"name\":")).skip(1).map(l -> l.split(",")[0]).forEach(l -> {
+				if(i == 0){
+					versionName = l.replace('"', " ".charAt(0)).trim();
+				}
+				i++;
+			});
 			
 		}catch(FileNotFoundException e){
 			e.printStackTrace();
@@ -51,15 +59,10 @@ public class VersionMain {
 		}catch(IOException e){
 			e.printStackTrace();
 		}
-		if(version < content){
-//			Alert alert = new Alert(AlertType.INFORMATION);
-//			alert.setTitle("Information");
-//			alert.setHeaderText("A new version is here");
-//			((Stage)alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image(Colors.class.getResourceAsStream("icon.png")));
-//			
+		if(version < content){			
 			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Update");
-			alert.setHeaderText("A new version is here, did you wan't to download it?");
+			alert.setTitle("Update: "+versionName);
+			alert.setHeaderText("A new version is here, did you wan't to download it?\nYour version: "+version+"\nLast version: "+content);
 			((Stage)alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image(Colors.class.getResourceAsStream("icon.png")));
 			
 			Optional<ButtonType> result = alert.showAndWait();
@@ -69,7 +72,8 @@ public class VersionMain {
 				
 				 try {
 					String url_open ="https://github.com/entonoire/AverageCalculator/releases/download/"+content+"/AverageCalc.jar";
-					java.awt.Desktop.getDesktop().browse(java.net.URI.create(url_open));
+					Desktop.getDesktop().browse(URI.create(url_open));
+					System.exit(0);
 			        }catch (IOException e) {
 			            e.printStackTrace();
 			        }
