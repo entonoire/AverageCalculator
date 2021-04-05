@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 
 public class VersionMain {
 
-	static Double version = 0.1;
+	static Double version = 0.3;
 	static Double content;
 	static int i = 0;
 	static String versionName;
