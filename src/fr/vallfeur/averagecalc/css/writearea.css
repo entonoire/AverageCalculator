@@ -1,18 +1,18 @@
-.text-area {
+.text-field {
 	-fx-background-color: transparent;
 	-fx-text-fill: rgb(114,137,218);
     -fx-font-weight: 900;
     -fx-font-size: 25;
 }
 
-.text-area .scroll-pane {
+.text-field .scroll-pane {
     -fx-background-color: transparent;
 }
 
-.text-area .scroll-pane .viewport{
+.text-field .scroll-pane .viewport{
     -fx-background-color: transparent;
 }
 
-.text-area .scroll-pane .content{
+.text-field .scroll-pane .content{
     -fx-background-color: transparent;
 }
